@@ -1,0 +1,22 @@
+{
+  "name": "note-node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ManraajNijjar/note-node.git"
+  },
+  "author": "MSN",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ManraajNijjar/note-node/issues"
+  },
+  "homepage": "https://github.com/ManraajNijjar/note-node#readme",
+  "dependencies": {
+    "lodash": "^4.17.4"
+  }
+}
