@@ -1,22 +1,22 @@
 console.log('Starting App.js');
 
 const fs = require('fs');
-const os = require('os');
 const _ = require('lodash');
+
 const notes = require('./notes.js');
 
-var user = os.userInfo();
+var command = process.argv[2];
 
+console.log('Command: ', command);
 
-var filteredArray = _.uniq(['Hello', 'Mello', 'Hello', 'hello', 1, 2, 3, 4, 4]);
-console.log(filteredArray);
-//console.log(notes.add(7, 9));
-
-// var res = notes.addNote;
-// console.log(res);
-
-// fs.appendFile('greetings.txt', `Hello ${user.username}!`, function (err){
-//   if (err) {
-//     console.log('Unable to write file');
-//   }
-// });
+if(command === 'add'){
+  console.log('Adding Note');
+} else if(command === 'list'){
+  console.log('Listing All Notes');
+} else if(command === 'read'){
+  console.log('Reading Note');
+} else if(command === 'remove'){
+  console.log('Remove Note');
+}else {
+  console.log('Command not recognized')
+}
