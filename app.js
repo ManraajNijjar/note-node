@@ -1,12 +1,33 @@
-console.log('Starting App.js');
-
 const fs = require('fs');
 const _ = require('lodash');
 const yargs = require('yargs');
 
 const notes = require('./notes.js');
 
-const argv = yargs.argv;
+const titleOptions = title: {
+  describe: 'Title of a note',
+  demand: true,
+  alias: 't'
+};
+
+const argv = yargs
+.command('add', 'Add a New Note', {
+  title: titleOptions,
+  body: {
+    describe: 'Body of a note',
+    demand: true,
+    alias: 'b'
+  }
+})
+.command('list', 'list of all notes')
+.command('read', 'read a specific note', {
+  title: titleOptions
+})
+.command('remove', 'remove a specific note', {
+  title: titleOptions
+})
+.help()
+.argv;
 var command = argv._[0];
 
 if(command === 'add'){
@@ -14,19 +35,34 @@ if(command === 'add'){
   var note = notes.addNote(argv.title, argv.body);
   if (note) {
     console.log('Note written');
-    console.log(note.title);
-    console.log(note.body);
+    notes.printNote(note);
   } else {
     console.log('Note title taken');
   }
+
 } else if(command === 'list'){
-  notes.getAll()
+
+  var notesToList = notes.getAll();
+  notesToList.forEach((note) => {
+    notes.printNote(note);
+  });
+
 } else if(command === 'read'){
-  notes.readNote(argv.title);
+
+  var note = notes.readNote(argv.title);
+  if (note) {
+    console.log('Note Read');
+    notes.printNote(note);
+  } else {
+    console.log('Note not found');
+  }
+
 } else if(command === 'remove'){
+
   var noteRemoved = notes.removeNote(argv.title);
   var message = noteRemoved ? 'Note was removed' : 'No Note removed';
   console.log(message);
-}else {
+
+} else {
   console.log('Command not recognized')
 }
